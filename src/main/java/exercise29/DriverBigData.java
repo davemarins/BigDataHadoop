@@ -1,4 +1,4 @@
-package exercise28;
+package exercise29;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
@@ -30,7 +30,7 @@ public class DriverBigData extends Configured implements Tool {
         Path outputDir = new Path(args[3]);
         Configuration conf = this.getConf();
         Job job = Job.getInstance(conf);
-        job.setJobName("Exercise 28 - Mapping question-answer(s)");
+        job.setJobName("Exercise 29 - User selection");
         MultipleInputs.addInputPath(job, inputPath1, TextInputFormat.class, Mapper1BigData.class);
         MultipleInputs.addInputPath(job, inputPath2, TextInputFormat.class, Mapper2BigData.class);
         FileOutputFormat.setOutputPath(job, outputDir);

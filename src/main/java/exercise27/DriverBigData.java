@@ -1,4 +1,4 @@
-package exercise21;
+package exercise27;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
@@ -23,13 +23,13 @@ public class DriverBigData extends Configured implements Tool {
     @Override
     public int run(String[] args) throws Exception {
 
+        int exitCode;
         Path inputPath = new Path(args[0]), outputDir = new Path(args[1]);
         Configuration conf = this.getConf();
         Job job = Job.getInstance(conf);
         // it works in a hdfs only
-        // job.addCacheFile(new Path("stopwords.txt").toUri());
-        job.setJobName("Exercise 21 - Stopword elimination problem");
-
+        // job.addCacheFile(new Path("businessrules-es27.txt").toUri());
+        job.setJobName("Exercise 27 - Categorization rules");
         FileInputFormat.addInputPath(job, inputPath);
         FileOutputFormat.setOutputPath(job, outputDir);
 
@@ -44,10 +44,12 @@ public class DriverBigData extends Configured implements Tool {
         job.setNumReduceTasks(0);
 
         if (job.waitForCompletion(true)) {
-            return 0;
+            exitCode = 0;
         } else {
-            return 1;
+            exitCode = 1;
         }
+
+        return exitCode;
     }
 
 }

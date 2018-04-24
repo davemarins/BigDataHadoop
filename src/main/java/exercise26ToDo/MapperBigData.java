@@ -1,4 +1,4 @@
-package exercise26;
+package exercise26ToDo;
 
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;
@@ -20,6 +20,7 @@ public class MapperBigData extends Mapper<LongWritable, Text, NullWritable, Text
 
         String row;
         /*
+        It works in a hdfs only
         Path[] PathsCachedFiles = context.getLocalCacheFiles();
         BufferedReader fileStopWords = new BufferedReader(new FileReader(new File(PathsCachedFiles[0].toString())));
         */

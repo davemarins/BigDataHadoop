@@ -1,4 +1,4 @@
-package exercise26;
+package exercise26ToDo;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
@@ -27,8 +27,8 @@ public class DriverBigData extends Configured implements Tool {
         Path inputPath = new Path(args[0]), outputDir = new Path(args[1]);
         Configuration conf = this.getConf();
         Job job = Job.getInstance(conf);
-        // job.addCacheFile(new Path("/Users/davide/Documents/workspace/IdeaProjects/BigdataHadoop/dictionary.txt").toUri());
-
+        // it works in a hdfs only
+        // job.addCacheFile(new Path("dictionary.txt").toUri());
         job.setJobName("Exercise 26 - String to Integer conversion");
         FileInputFormat.addInputPath(job, inputPath);
         FileOutputFormat.setOutputPath(job, outputDir);

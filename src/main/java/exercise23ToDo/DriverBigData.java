@@ -1,4 +1,4 @@
-package exercise23daFinire;
+package exercise23ToDo;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
@@ -16,19 +16,20 @@ import org.apache.hadoop.util.ToolRunner;
 public class DriverBigData extends Configured implements Tool {
 
     public static void main(String args[]) throws Exception {
+
         int res = ToolRunner.run(new Configuration(), new DriverBigData(), args);
         System.exit(res);
+
     }
 
     @Override
     public int run(String[] args) throws Exception {
 
-        Path inputPath = new Path(args[0]), outputDir = new Path(args[1]), outputDir2 = new Path(args[2]);
-        int exitCode, numberOfReducers = Integer.parseInt(args[4]);
+        int numberOfReducers = Integer.parseInt(args[0]), exitCode;
+        Path inputPath = new Path(args[1]), outputDir = new Path("temp/"), outputDir2 = new Path(args[2]);
         Configuration conf = this.getConf();
         conf.set("username", args[3]);
         Job job = Job.getInstance(conf);
-
         job.setJobName("Exercise 23 - Potential friends of a specific user");
 
         FileInputFormat.addInputPath(job, inputPath);
@@ -49,11 +50,9 @@ public class DriverBigData extends Configured implements Tool {
         job.setNumReduceTasks(numberOfReducers);
 
         if (job.waitForCompletion(true)) {
-
             Configuration conf2 = this.getConf();
             Job job2 = Job.getInstance(conf2);
-            job2.setJobName("Exercise 23 - Potential friends of a specific user");
-
+            job2.setJobName("Exercise 23 - Potential friends of a specific user (filtering)");
             FileInputFormat.addInputPath(job2, outputDir);
             FileOutputFormat.setOutputPath(job2, outputDir2);
 
@@ -81,5 +80,7 @@ public class DriverBigData extends Configured implements Tool {
             exitCode = 1;
         }
         return exitCode;
+
     }
+
 }

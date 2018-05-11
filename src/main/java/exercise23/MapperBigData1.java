@@ -1,4 +1,4 @@
-package exercise23ToDo;
+package exercise23;
 
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
@@ -6,7 +6,7 @@ import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
 
-class MapperBigData extends Mapper<LongWritable, Text, Text, Text> {
+class MapperBigData1 extends Mapper<LongWritable, Text, Text, Text> {
 
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 

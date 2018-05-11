@@ -1,2 +1,5 @@
-Don't read me, just read the comments on the code and the pdf files in which the exercises and the labs are explained
-
+Every package contains a good runnable solution.
+For newbies I strongly recommend to start reading something online,
+then if they want to practise with some Java code, this
+is the right repo.
+Text, data and solution are provided here.

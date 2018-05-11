@@ -1,4 +1,4 @@
-package exercise26ToDo;
+package exercise26;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
@@ -23,13 +23,21 @@ public class DriverBigData extends Configured implements Tool {
     @Override
     public int run(String[] args) throws Exception {
 
-        int exitCode;
         Path inputPath = new Path(args[0]), outputDir = new Path(args[1]);
+
         Configuration conf = this.getConf();
         Job job = Job.getInstance(conf);
-        // it works in a hdfs only
+
+        // Add hdfs file dictionary.txt in the distributed cache
+        // stopwords.txt can now be read by all mappers of this application
+        // independently of the nodes of the cluster used to run the application
         // job.addCacheFile(new Path("dictionary.txt").toUri());
-        job.setJobName("Exercise 26 - String to Integer conversion");
+
+        job.getConfiguration().set("dictionary",
+                "/Users/davide/Documents/workspace/IdeaProjects/BigdataHadoop/dictionary.txt");
+
+        job.setJobName("Exercise 26 - Word to integer conversion");
+
         FileInputFormat.addInputPath(job, inputPath);
         FileOutputFormat.setOutputPath(job, outputDir);
 
@@ -44,12 +52,11 @@ public class DriverBigData extends Configured implements Tool {
         job.setNumReduceTasks(0);
 
         if (job.waitForCompletion(true)) {
-            exitCode = 0;
+            return 0;
         } else {
-            exitCode = 1;
+            return 1;
         }
 
-        return exitCode;
     }
 
 }
